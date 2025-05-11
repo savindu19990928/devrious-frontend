@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Remix for general UI -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Devicon for tech stack icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+  <script src="https://kit.fontawesome.com/46ede3e655.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devrious</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#10b981",
+            secondary: "#059669"
+          },
+          borderRadius: {
+            none: "0px",
+            sm: "4px",
+            DEFAULT: "8px",
+            md: "12px",
+            lg: "16px",
+            xl: "20px",
+            "2xl": "24px",
+            "3xl": "32px",
+            full: "9999px",
+            button: "8px",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    :where([class^="ri-"])::before {
+      content: "\f3c2";
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    .header {
+      transition: background-color 0.3s ease;
+    }
+
+    .hero-slide {
+      opacity: 0;
+      transition: opacity 1s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .slide-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .slide-indicator.active {
+      background-color: white;
+    }
+
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .service-icon {
+      transition: transform 0.5s ease;
+    }
+
+    .service-card:hover .service-icon {
+      transform: rotate(10deg);
+    }
+
+    .portfolio-item {
+      overflow: hidden;
+    }
+
+    .portfolio-overlay {
+      opacity: 0;
+      background: rgba(16, 185, 129, 0.9);
+      transition: opacity 0.3s ease;
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+
+    .portfolio-item img {
+      transition: transform 0.5s ease;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .client-slider {
+      animation: slide 20s linear infinite;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .client-slider:hover {
+      animation-play-state: paused;
+    }
+
+    .social-icon {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: translateY(-5px);
+      color: var(--tw-color-primary-500);
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .back-to-top {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .custom-checkbox {
+      position: relative;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border: 2px solid #d1d5db;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .custom-checkbox.checked {
+      background-color: #10b981;
+      border-color: #10b981;
+    }
+
+    .custom-checkbox.checked::after {
+      content: "";
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 5px;
+      height: 10px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+    }
+  </style>
+</head>
+
+<body class="bg-white">
+  <!-- Header/Navigation -->
+  <header id="header" class="header fixed w-full z-50 bg-transparent">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-3xl font-['Pacifico'] text-white"><img src="path/to/your/logo.png" alt="Logo" /></a>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="text-white hover:text-primary font-medium transition-colors">Home</a>
+        <a href="#services" class="text-white hover:text-primary font-medium transition-colors">Services</a>
+        <a href="#about" class="text-white hover:text-primary font-medium transition-colors">About</a>
+        <a href="#works" class="text-white hover:text-primary font-medium transition-colors">Portfolio</a>
+        <a href="#contact" class="text-white hover:text-primary font-medium transition-colors">Contact</a>
+      </nav>
+
+      <div class="md:hidden w-10 h-10 flex items-center justify-center">
+        <i class="ri-menu-line text-white text-2xl"></i>
+      </div>
+    </div>
+  </header>
+  <!-- Hero Section with Slider -->
+  <section id="home" class="relative h-screen overflow-hidden">
+    <div class="hero-slider relative w-full h-full">
+      <div class="hero-slide active">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 z-10"></div>
+        <img src="https://readdy.ai/api/search-image?query=modern%20creative%20agency%20office%20with%20designers%20working%2C%20stylish%20interior%2C%20soft%20lighting%2C%20professional%20atmosphere%2C%20high-end%20computers%2C%20design%20elements%2C%20creative%20workspace%2C%20artistic%20environment%2C%20collaborative%20setting%2C%20high%20quality%2C%20photorealistic&width=1920&height=1080&seq=1&orientation=landscape" alt="Creative Agency" class="absolute inset-0 w-full h-full object-cover object-top" />
+        <div class="container mx-auto px-6 relative z-20 h-full flex items-center">
+          <div class="max-w-2xl">
+            <h1 class="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+              Create Digital Experiences That Matter
+            </h1>
+            <p class="text-xl text-white/90 mb-8">
+              Transform your brand with our award-winning creative solutions
+              tailored to elevate your business to new heights.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#contact">
+                <button class="!rounded-button bg-primary text-white px-8 py-3 font-medium hover:bg-primary/90 transition-all shadow-lg whitespace-nowrap">
+                  Get Started
+                </button>
+              </a>
+              <a href="#works">
+                <button class="!rounded-button bg-transparent border-2 border-white text-white px-8 py-3 font-medium hover:bg-white/10 transition-all whitespace-nowrap">
+                  Our Work
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 z-10"></div>
+        <img src="https://readdy.ai/api/search-image?query=creative%20team%20brainstorming%20in%20modern%20office%2C%20collaborative%20workspace%2C%20innovative%20environment%2C%20digital%20screens%20displaying%20designs%2C%20creative%20professionals%20discussing%20ideas%2C%20artistic%20atmosphere%2C%20high-end%20equipment%2C%20professional%20lighting%2C%20stylish%20interior%20design&width=1920&height=1080&seq=2&orientation=landscape" alt="Creative Team" class="absolute inset-0 w-full h-full object-cover object-top" />
+        <div class="container mx-auto px-6 relative z-20 h-full flex items-center">
+          <div class="max-w-2xl">
+            <h1 class="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+              Innovative Solutions for Modern Brands
+            </h1>
+            <p class="text-xl text-white/90 mb-8">
+              We combine creativity with strategic thinking to deliver
+              exceptional results that drive growth and engagement.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#services">
+                <button class="!rounded-button bg-primary text-white px-8 py-3 font-medium hover:bg-primary/90 transition-all shadow-lg whitespace-nowrap">
+                  Our Services
+                </button>
+              </a>
+              <a href="#contact">
+                <button class="!rounded-button bg-transparent border-2 border-white text-white px-8 py-3 font-medium hover:bg-white/10 transition-all whitespace-nowrap">
+                  Contact Us
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 z-10"></div>
+        <img src="https://readdy.ai/api/search-image?query=digital%20marketing%20team%20presenting%20to%20clients%2C%20professional%20meeting%20room%2C%20large%20screens%20with%20data%20visualization%2C%20creative%20professionals%2C%20business%20presentation%2C%20modern%20office%20space%2C%20elegant%20interior%2C%20collaborative%20environment%2C%20high-quality%20photography&width=1920&height=1080&seq=3&orientation=landscape" alt="Digital Marketing" class="absolute inset-0 w-full h-full object-cover object-top" />
+        <div class="container mx-auto px-6 relative z-20 h-full flex items-center">
+          <div class="max-w-2xl">
+            <h1 class="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+              Elevate Your Digital Presence
+            </h1>
+            <p class="text-xl text-white/90 mb-8">
+              From branding to digital marketing, we provide comprehensive
+              solutions to help your business thrive in the digital landscape.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#works">
+                <button class="!rounded-button bg-primary text-white px-8 py-3 font-medium hover:bg-primary/90 transition-all shadow-lg whitespace-nowrap">
+                  Explore Solutions
+                </button>
+              </a>
+              <a href="#about">
+                <button class="!rounded-button bg-transparent border-2 border-white text-white px-8 py-3 font-medium hover:bg-white/10 transition-all whitespace-nowrap">
+                  About Us
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slide Indicators -->
+      <div class="absolute bottom-10 left-0 right-0 z-20 flex justify-center gap-3">
+        <div class="slide-indicator active" data-slide="0"></div>
+        <div class="slide-indicator" data-slide="1"></div>
+        <div class="slide-indicator" data-slide="2"></div>
+      </div>
+    </div>
+  </section>
+  <!-- Services Section -->
+  <section id="services" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Our Services</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          We offer a comprehensive range of creative and strategic services to
+          help your business grow and succeed in today's competitive market.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Service 1 -->
+        <div class="service-card bg-white p-8 rounded-lg shadow-md">
+          <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-lg mb-6">
+            <i class="service-icon ri-palette-line text-primary text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Brand Identity</h3>
+          <p class="text-gray-600 mb-4">
+            We create distinctive brand identities that resonate with your
+            target audience and set you apart from competitors.
+          </p>
+          <a href="#" class="text-primary font-medium flex items-center">
+            <!-- Learn More <i class="ri-arrow-right-line ml-2"></i> -->
+          </a>
+        </div>
+        <!-- Service 2 -->
+        <div class="service-card bg-white p-8 rounded-lg shadow-md">
+          <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-lg mb-6">
+            <i class="service-icon ri-code-s-slash-line text-primary text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Web Development</h3>
+          <p class="text-gray-600 mb-4">
+            Our team builds responsive, user-friendly websites that deliver
+            exceptional experiences across all devices.
+          </p>
+          <a href="#" class="text-primary font-medium flex items-center">
+            <!-- Learn More <i class="ri-arrow-right-line ml-2"></i> -->
+          </a>
+        </div>
+        <!-- Service 3 -->
+        <div class="service-card bg-white p-8 rounded-lg shadow-md">
+          <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-lg mb-6">
+            <i class="service-icon ri-line-chart-line text-primary text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Digital Marketing</h3>
+          <p class="text-gray-600 mb-4">
+            We implement data-driven marketing strategies to increase your
+            online visibility and drive meaningful engagement.
+          </p>
+          <a href="#" class="text-primary font-medium flex items-center">
+            <!-- Learn More <i class="ri-arrow-right-line ml-2"></i> -->
+          </a>
+        </div>
+        <!-- Service 4 -->
+        <div class="service-card bg-white p-8 rounded-lg shadow-md">
+          <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-lg mb-6">
+            <i class="service-icon ri-movie-line text-primary text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Video Production</h3>
+          <p class="text-gray-600 mb-4">
+            From concept to final edit, we produce high-quality videos that
+            tell your story and captivate your audience.
+          </p>
+          <a href="#" class="text-primary font-medium flex items-center">
+            <!-- Learn More <i class="ri-arrow-right-line ml-2"></i> -->
+          </a>
+        </div>
+        <!-- Service 5 -->
+        <div class="service-card bg-white p-8 rounded-lg shadow-md">
+          <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-lg mb-6">
+            <i class="service-icon ri-smartphone-line text-primary text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Mobile App Design</h3>
+          <p class="text-gray-600 mb-4">
+            We design intuitive, feature-rich mobile applications that enhance
+            user experience and drive engagement.
+          </p>
+          <a href="#" class="text-primary font-medium flex items-center">
+            <!-- Learn More <i class="ri-arrow-right-line ml-2"></i> -->
+          </a>
+        </div>
+        <!-- Service 6 -->
+        <div class="service-card bg-white p-8 rounded-lg shadow-md">
+          <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-lg mb-6">
+            <i class="service-icon ri-megaphone-line text-primary text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Social Media Management</h3>
+          <p class="text-gray-600 mb-4">
+            We build and manage your social media presence to increase brand
+            awareness and foster community engagement.
+          </p>
+          <a href="#" class="text-primary font-medium flex items-center">
+            <!-- Learn More <i class="ri-arrow-right-line ml-2"></i> -->
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- About Section -->
+  <section id="about" class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-center gap-16">
+        <div class="lg:w-1/2 overflow-hidden rounded-lg">
+          <img src="https://readdy.ai/api/search-image?query=creative%20team%20in%20modern%20office%20environment%2C%20diverse%20professionals%20collaborating%2C%20stylish%20workspace%20with%20design%20elements%2C%20natural%20lighting%2C%20creative%20professionals%20working%20together%2C%20artistic%20atmosphere%2C%20high-end%20equipment%2C%20professional%20setting&width=800&height=600&seq=4&orientation=landscape" alt="About Our Team" class="w-full h-auto" />
+        </div>
+        <div class="lg:w-1/2">
+          <h2 class="text-4xl font-bold mb-6">About Our Creative Team</h2>
+          <p class="text-gray-600 mb-6">
+            Founded in 2019, we are a collective of experienced freelancers united by a shared vision: to transform ideas into impactful digital experiences. While we operate as an independent group of professionals, we offer the flexibility and expertise of a full-service digital team. Our collective spans a diverse range of disciplines, including branding, web design and development, digital marketing, content creation, and more, allowing us to deliver comprehensive solutions tailored to our clients’ needs.
+          </p>
+          <p class="text-gray-600 mb-6">
+            What sets us apart is our ability to seamlessly blend strategic insight with imaginative execution. We don’t just create beautiful work — we ensure it delivers measurable results. By deeply understanding our clients' goals, industries, and audiences, we craft custom solutions that drive engagement, build brand equity, and generate growth. Our approach is rooted in collaboration, ensuring that each project is driven by a mix of creativity, strategy, and technical expertise.
+          </p>
+          <!-- <p class="text-gray-600 mb-8">
+            Our mission is to help brands connect with their audiences through authentic storytelling, innovative design, and user-focused digital experiences.
+          </p> -->
+          <div class="grid grid-cols-2 gap-8 mb-8">
+            <!-- <div>
+              <div class="text-4xl font-bold text-primary mb-2" id="projects-counter">
+                250+
+              </div>
+              <p class="text-gray-600">Projects Completed</p>
+            </div>
+            <div>
+              <div class="text-4xl font-bold text-primary mb-2" id="clients-counter">
+                120+
+              </div>
+              <p class="text-gray-600">Happy Clients</p> -->
+          </div>
+          <!-- <button class="!rounded-button bg-primary text-white px-8 py-3 font-medium hover:bg-primary/90 transition-all shadow-md whitespace-nowrap">
+            More About Us
+          </button> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Creative Agency Showcase -->
+  <section class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-600 to-emerald-800 opacity-90 z-0"></div>
+    <img src="https://readdy.ai/api/search-image?query=abstract%20creative%20background%20with%20flowing%20shapes%2C%20modern%20design%20elements%2C%20soft%20gradient%20colors%2C%20artistic%20patterns%2C%20professional%20look%2C%20high%20quality%2C%20suitable%20for%20creative%20agency%20background&width=1920&height=1080&seq=5&orientation=landscape" alt="Creative Background" class="absolute inset-0 w-full h-full object-cover object-top mix-blend-overlay opacity-30" />
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-white mb-4">
+          Why Choose Our Creative Team?
+        </h2>
+        <p class="text-xl text-white/80 max-w-2xl mx-auto">
+          We're not just another team of professionals. We're your strategic partner
+          committed to delivering exceptional results.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20">
+          <div class="w-16 h-16 flex items-center justify-center bg-white/20 rounded-full mb-6">
+            <i class="ri-lightbulb-line text-white text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">
+            Innovative Thinking
+          </h3>
+          <p class="text-white/80">
+            We approach every project with fresh perspectives and creative
+            solutions that help your brand stand out.
+          </p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20">
+          <div class="w-16 h-16 flex items-center justify-center bg-white/20 rounded-full mb-6">
+            <i class="ri-team-line text-white text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Expert Team</h3>
+          <p class="text-white/80">
+            Our diverse team of specialists brings a wealth of experience and
+            expertise to every project we undertake.
+          </p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20">
+          <div class="w-16 h-16 flex items-center justify-center bg-white/20 rounded-full mb-6">
+            <i class="ri-customer-service-2-line text-white text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Dedicated Support</h3>
+          <p class="text-white/80">
+            We provide ongoing support and guidance to ensure your continued
+            success long after project completion.
+          </p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20">
+          <div class="w-16 h-16 flex items-center justify-center bg-white/20 rounded-full mb-6">
+            <i class="ri-timer-line text-white text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Timely Delivery</h3>
+          <p class="text-white/80">
+            We understand the importance of deadlines and are committed to
+            delivering quality work on time, every time.
+          </p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20">
+          <div class="w-16 h-16 flex items-center justify-center bg-white/20 rounded-full mb-6">
+            <i class="ri-focus-3-line text-white text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Results-Driven</h3>
+          <p class="text-white/80">
+            Our strategies are designed to achieve measurable results that
+            contribute to your business growth and success.
+          </p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20">
+          <div class="w-16 h-16 flex items-center justify-center bg-white/20 rounded-full mb-6">
+            <i class="ri-global-line text-white text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">
+            Global Perspective
+          </h3>
+          <p class="text-white/80">
+            With clients across different industries and regions, we bring a
+            global perspective to your local challenges.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Works Portfolio Section -->
+  <section id="works" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Our Portfolio</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Explore our latest projects and see how we've helped our clients
+          achieve their goals through creative solutions.
+        </p>
+      </div>
+      <!-- Portfolio Filter -->
+      <!-- <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <button class="!rounded-button px-6 py-2 bg-primary text-white font-medium transition-all whitespace-nowrap">
+          All
+        </button>
+        <button
+          class="!rounded-button px-6 py-2 bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-all whitespace-nowrap">
+          Web Design
+        </button>
+        <button
+          class="!rounded-button px-6 py-2 bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-all whitespace-nowrap">
+          Branding
+        </button>
+        <button
+          class="!rounded-button px-6 py-2 bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-all whitespace-nowrap">
+          Mobile Apps
+        </button>
+        <button
+          class="!rounded-button px-6 py-2 bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-all whitespace-nowrap">
+          Marketing
+        </button> -->
+    </div>
+    <!-- Portfolio Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Portfolio Item 1 -->
+      <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+        <div class="relative overflow-hidden" style="height: 280px">
+          <img src="https://readdy.ai/api/search-image?query=modern%20e-commerce%20website%20design%20on%20laptop%20screen%2C%20professional%20web%20design%2C%20clean%20interface%2C%20product%20showcase%2C%20shopping%20cart%20functionality%2C%20high-quality%20product%20images%2C%20responsive%20design%20elements%2C%20professional%20photography&width=600&height=400&seq=6&orientation=landscape" alt="E-commerce Website" class="w-full h-full object-cover object-top" />
+          <div class="portfolio-overlay absolute inset-0 flex flex-col items-center justify-center p-6">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Luxury E-commerce Platform
+            </h3>
+            <p class="text-white/80 text-center mb-4">
+              Web Design & Development
+            </p>
+            <a href="#" class="!rounded-button px-6 py-2 bg-white text-primary font-medium hover:bg-white/90 transition-all whitespace-nowrap">View
+              Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- Portfolio Item 2 -->
+      <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+        <div class="relative overflow-hidden" style="height: 280px">
+          <img src="https://readdy.ai/api/search-image?query=mobile%20app%20interface%20design%20on%20smartphone%2C%20user-friendly%20mobile%20application%2C%20clean%20UI%2FUX%20design%2C%20app%20screens%2C%20intuitive%20navigation%2C%20modern%20mobile%20design%2C%20professional%20app%20development%2C%20high-quality%20interface&width=600&height=400&seq=7&orientation=portrait" alt="Mobile App Design" class="w-full h-full object-cover object-top" />
+          <div class="portfolio-overlay absolute inset-0 flex flex-col items-center justify-center p-6">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Fitness Tracking App
+            </h3>
+            <p class="text-white/80 text-center mb-4">Mobile App Design</p>
+            <a href="#" class="!rounded-button px-6 py-2 bg-white text-primary font-medium hover:bg-white/90 transition-all whitespace-nowrap">View
+              Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- Portfolio Item 3 -->
+      <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+        <div class="relative overflow-hidden" style="height: 280px">
+          <img src="https://readdy.ai/api/search-image?query=brand%20identity%20design%20with%20logo%2C%20business%20cards%2C%20and%20stationery%2C%20professional%20branding%20package%2C%20corporate%20identity%2C%20logo%20design%2C%20brand%20guidelines%2C%20color%20palette%2C%20typography%2C%20marketing%20materials%2C%20high-quality%20print%20design&width=600&height=400&seq=8&orientation=landscape" alt="Brand Identity" class="w-full h-full object-cover object-top" />
+          <div class="portfolio-overlay absolute inset-0 flex flex-col items-center justify-center p-6">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Artisan Cafe Rebrand
+            </h3>
+            <p class="text-white/80 text-center mb-4">Brand Identity</p>
+            <a href="#" class="!rounded-button px-6 py-2 bg-white text-primary font-medium hover:bg-white/90 transition-all whitespace-nowrap">View
+              Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- Portfolio Item 4 -->
+      <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+        <div class="relative overflow-hidden" style="height: 280px">
+          <img src="https://readdy.ai/api/search-image?query=social%20media%20marketing%20campaign%20with%20analytics%20dashboard%2C%20digital%20marketing%20strategy%2C%20social%20media%20content%2C%20engagement%20metrics%2C%20professional%20marketing%20campaign%2C%20data%20visualization%2C%20marketing%20results%2C%20high-quality%20digital%20marketing&width=600&height=400&seq=9&orientation=landscape" alt="Social Media Campaign" class="w-full h-full object-cover object-top" />
+          <div class="portfolio-overlay absolute inset-0 flex flex-col items-center justify-center p-6">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Tech Startup Campaign
+            </h3>
+            <p class="text-white/80 text-center mb-4">Digital Marketing</p>
+            <a href="#" class="!rounded-button px-6 py-2 bg-white text-primary font-medium hover:bg-white/90 transition-all whitespace-nowrap">View
+              Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- Portfolio Item 5 -->
+      <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+        <div class="relative overflow-hidden" style="height: 280px">
+          <img src="https://readdy.ai/api/search-image?query=video%20production%20set%20with%20cameras%20and%20lighting%20equipment%2C%20professional%20video%20shoot%2C%20film%20production%2C%20creative%20direction%2C%20cinematic%20lighting%2C%20high-end%20cameras%2C%20production%20crew%2C%20professional%20filmmaking&width=600&height=400&seq=10&orientation=landscape" alt="Video Production" class="w-full h-full object-cover object-top" />
+          <div class="portfolio-overlay absolute inset-0 flex flex-col items-center justify-center p-6">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Luxury Hotel Promo
+            </h3>
+            <p class="text-white/80 text-center mb-4">Video Production</p>
+            <a href="#" class="!rounded-button px-6 py-2 bg-white text-primary font-medium hover:bg-white/90 transition-all whitespace-nowrap">View
+              Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- Portfolio Item 6 -->
+      <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+        <div class="relative overflow-hidden" style="height: 280px">
+          <img src="https://readdy.ai/api/search-image?query=responsive%20website%20design%20on%20multiple%20devices%2C%20web%20development%20project%2C%20cross-platform%20compatibility%2C%20desktop%20and%20mobile%20design%2C%20professional%20web%20design%2C%20user%20interface%2C%20responsive%20layout%2C%20high-quality%20web%20development&width=600&height=400&seq=11&orientation=landscape" alt="Responsive Website" class="w-full h-full object-cover object-top" />
+          <div class="portfolio-overlay absolute inset-0 flex flex-col items-center justify-center p-6">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Financial Services Platform
+            </h3>
+            <p class="text-white/80 text-center mb-4">Web Development</p>
+            <a href="#" class="!rounded-button px-6 py-2 bg-white text-primary font-medium hover:bg-white/90 transition-all whitespace-nowrap">View
+              Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <button class="!rounded-button bg-primary text-white px-8 py-3 font-medium hover:bg-primary/90 transition-all shadow-md whitespace-nowrap">
+        View All Projects
+      </button>
+    </div>
+    </div>
+  </section>
+  <!-- Solutions Section -->
+  <section class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-start gap-16">
+        <div class="lg:w-1/2">
+          <h2 class="text-4xl font-bold mb-6">Our Mission & Vision</h2>
+          <p class="text-gray-600 mb-8">
+            At our core, we believe in the power of creativity to transform
+            businesses and connect brands with their audiences in meaningful
+            ways. Our approach combines strategic thinking with creative
+            execution to deliver exceptional results.
+          </p>
+          <div class="mb-12">
+            <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+            <p class="text-gray-600 mb-6">
+              To empower businesses through innovative digital solutions that
+              drive growth, enhance brand visibility, and create meaningful
+              connections with their audience.
+            </p>
+            <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
+            <p class="text-gray-600">
+              To be the leading creative team known for delivering
+              exceptional digital experiences that transform businesses and
+              set new industry standards.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Our Values</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="flex items-start">
+                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-4 mt-1">
+                  <i class="ri-check-line text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Innovation</h4>
+                  <p class="text-gray-600 text-sm">
+                    We embrace new ideas and approaches to solve complex
+                    challenges.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-4 mt-1">
+                  <i class="ri-check-line text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Excellence</h4>
+                  <p class="text-gray-600 text-sm">
+                    We strive for excellence in everything we do, from concept
+                    to execution.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-4 mt-1">
+                  <i class="ri-check-line text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Integrity</h4>
+                  <p class="text-gray-600 text-sm">
+                    We operate with honesty, transparency, and ethical
+                    standards.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-4 mt-1">
+                  <i class="ri-check-line text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Collaboration</h4>
+                  <p class="text-gray-600 text-sm">
+                    We believe in the power of teamwork and partnership.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/2">
+          <h3 class="text-2xl font-bold mb-6">Our Company History</h3>
+
+          <div class="relative border-l-2 border-primary/30 pl-8 pb-8">
+            <div class="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full -translate-x-1/2"></div>
+            <div class="mb-6">
+              <h4 class="text-xl font-bold mb-1">2019: Humble Beginnings</h4>
+              <p class="text-gray-500 text-sm mb-2">
+                Started with a single founder and a clear vision
+              </p>
+              <p class="text-gray-600">
+                Our journey began with a focus on delivering thoughtful and impactful digital solutions. Armed with determination and a passion for creativity, we took on freelance projects that laid the foundation for what would become a thriving digital team.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative border-l-2 border-primary/30 pl-8 pb-8">
+            <div class="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full -translate-x-1/2"></div>
+            <div class="mb-6">
+              <h4 class="text-xl font-bold mb-1">2021: Building the Brand</h4>
+              <p class="text-gray-500 text-sm mb-2">
+                Established a strong identity and formal service offerings
+              </p>
+              <p class="text-gray-600">
+                As demand grew, we refined our services and established a clear brand identity. By developing tailored websites and visual content for early-stage businesses, we started earning trust and recognition within the industry.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative border-l-2 border-primary/30 pl-8 pb-8">
+            <div class="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full -translate-x-1/2"></div>
+            <div class="mb-6">
+              <h4 class="text-xl font-bold mb-1">2023: Adapting & Evolving</h4>
+              <p class="text-gray-500 text-sm mb-2">
+                Embraced digital-first strategies during global shifts
+              </p>
+              <p class="text-gray-600">
+                In response to worldwide changes, we shifted to a fully digital workflow and broadened our capabilities in UX, content strategy, and performance marketing. This period sharpened our adaptability and focus on long-term value for clients.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative border-l-2 border-primary/30 pl-8">
+            <div class="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full -translate-x-1/2"></div>
+            <div>
+              <h4 class="text-xl font-bold mb-1">2025: Expanding Horizons</h4>
+              <p class="text-gray-500 text-sm mb-2">
+                Reached new markets and diversified our portfolio
+              </p>
+              <p class="text-gray-600">
+                With a growing reputation, we began collaborating with clients beyond our local region, offering cross-industry expertise. This stage marked a shift to more complex, integrated digital projects and lasting client partnerships.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Clients Section -->
+  <section id="tech" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Our Tecnologies</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          We use the latest in cloud, web, and data technologies to create secure, scalable, and high-performance
+          solutions tailored to your needs.
+        </p>
+      </div>
+      <div class="overflow-hidden relative">
+        <div class="client-slider flex gap-12 items-center py-8">
+          <!-- Client 1 -->
+          <!-- Django -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-gray-500 mb-3">
+              <i class="devicon-django-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">Django</p>
+          </div>
+
+          <!-- React -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-blue-500 mb-3">
+              <i class="devicon-react-original colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">React</p>
+          </div>
+
+          <!-- Flutter -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-blue-400 mb-3">
+              <i class="devicon-flutter-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">Flutter</p>
+          </div>
+
+          <!-- Spring Boot -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-green-600 mb-3">
+              <i class="devicon-spring-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">Spring Boot</p>
+          </div>
+
+          <!-- C# -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-purple-600 mb-3">
+              <i class="devicon-csharp-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">C#</p>
+          </div>
+          <!-- Node.js -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-green-600 mb-3">
+              <i class="devicon-nodejs-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">Node.js</p>
+          </div>
+
+          <!-- SQL -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-blue-700 mb-3">
+              <i class="devicon-mysql-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">SQL</p>
+          </div>
+
+          <!-- NoSQL (MongoDB example) -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-green-700 mb-3">
+              <i class="devicon-mongodb-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">NoSQL</p>
+          </div>
+          <!-- Laravel -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-red-600 mb-3">
+              <i class="devicon-laravel-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">Laravel</p>
+          </div>
+          <!-- Python -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-yellow-500 mb-3">
+              <i class="devicon-python-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">Python</p>
+          </div>
+          <!-- Angular -->
+          <div class="flex flex-col items-center min-w-[180px]">
+            <div class="w-16 h-16 flex items-center justify-center text-red-500 mb-3">
+              <i class="devicon-angularjs-plain colored text-4xl"></i>
+            </div>
+            <p class="font-medium text-gray-700">Angular</p>
+          </div>
+        </div>
+        <!-- <div class="mt-16 bg-white p-8 rounded-lg shadow-md">
+          <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/4 mb-6 md:mb-0 flex justify-center">
+              <img src="https://readdy.ai/api/search-image?query=professional%20business%20woman%20portrait%2C%20confident%20female%20executive%2C%20corporate%20headshot%2C%20professional%20attire%2C%20neutral%20background%2C%20high-quality%20professional%20photography&width=200&height=200&seq=12&orientation=portrait" alt="Client Testimonial" class="w-24 h-24 rounded-full object-cover object-top" />
+            </div>
+            <div class="md:w-3/4 md:pl-8">
+              <div class="flex text-primary mb-3">
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+              </div>
+              <p class="text-gray-600 italic mb-4">
+                "Working with this creative agency has been a game-changer for
+                our brand. Their strategic approach and creative execution
+                helped us increase our online visibility and engagement
+                significantly. The team is professional, responsive, and truly
+                invested in our success."
+              </p>
+              <div>
+                <h4 class="font-bold">Emily Richardson</h4>
+                <p class="text-gray-500">Marketing Director, TechVision Inc.</p>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+  </section>
+  <!-- Final CTA Section -->
+  <section id="contact" class="py-20 relative">
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-600 to-emerald-800 opacity-90 z-0"></div>
+    <img src="https://readdy.ai/api/search-image?query=abstract%20creative%20background%20with%20flowing%20shapes%2C%20modern%20design%20elements%2C%20soft%20gradient%20colors%2C%20artistic%20patterns%2C%20professional%20look%2C%20high%20quality%2C%20suitable%20for%20creative%20agency%20background&width=1920&height=1080&seq=13&orientation=landscape" alt="CTA Background" class="absolute inset-0 w-full h-full object-cover object-top mix-blend-overlay opacity-30" />
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+        <div class="flex flex-col md:flex-row">
+          <div class="md:w-1/2 p-8 md:p-12 bg-gray-50">
+            <h2 class="text-3xl font-bold mb-6">
+              Ready to Start Your Project?
+            </h2>
+            <p class="text-gray-600 mb-8">
+              Fill out the form and one of our experts will get in touch with
+              you to discuss your project needs and how we can help.
+            </p>
+            <div class="mb-8">
+              <h3 class="font-bold mb-3">Our Office</h3>
+              <p class="text-gray-600 mb-1">161/6 Old Road</p>
+              <p class="text-gray-600 mb-1">Navinna, Maharagama</p>
+              <p class="text-gray-600">Sri Lanka</p>
+            </div>
+            <div class="mb-8">
+              <h3 class="font-bold mb-3">Contact Information</h3>
+              <p class="text-gray-600 mb-1">
+                Email: <a href="mailto:info@devrious.lk" class="text-primary hover:underline">info@devrious.lk</a>
+              </p>
+              <p class="text-gray-600">
+                Phone: <a href="tel:+94755746933" class="text-primary hover:underline">+94 75 574 6933</a>
+              </p>
+            </div>
+            <div class="flex space-x-4">
+              <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full social-icon">
+                <i class="ri-facebook-fill text-gray-700"></i>
+              </a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full social-icon">
+                <i class="ri-twitter-fill text-gray-700"></i>
+              </a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full social-icon">
+                <i class="ri-instagram-fill text-gray-700"></i>
+              </a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full social-icon">
+                <i class="ri-linkedin-fill text-gray-700"></i>
+              </a>
+            </div>
+          </div>
+          <div class="md:w-1/2 p-8 md:p-12">
+            <form>
+              <div class="mb-6">
+                <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary" placeholder="Your name" />
+              </div>
+              <div class="mb-6">
+                <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary" placeholder="Your email" />
+              </div>
+              <div class="mb-6">
+                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary" placeholder="Your phone" />
+              </div>
+              <div class="mb-6">
+                <label for="service" class="block text-gray-700 font-medium mb-2">Service Interested In</label>
+                <div class="relative">
+                  <select id="service" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary appearance-none pr-8">
+                    <option value="" selected disabled>
+                      Select a service
+                    </option>
+                    <option value="web-design">
+                      Web Design & Development
+                    </option>
+                    <option value="branding">Brand Identity</option>
+                    <option value="digital-marketing">
+                      Digital Marketing
+                    </option>
+                    <option value="mobile-app">Mobile App Development</option>
+                    <option value="video">Video Production</option>
+                  </select>
+                  <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <i class="ri-arrow-down-s-line text-gray-500"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-6">
+                <label for="message" class="block text-gray-700 font-medium mb-2">Project Details</label>
+                <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary" placeholder="Tell us about your project"></textarea>
+              </div>
+              <!-- <div class="mb-8 flex items-start">
+                <div class="custom-checkbox mr-3 mt-1" id="privacy-checkbox"></div>
+                <label for="privacy-checkbox" class="text-gray-600 text-sm">I agree to the
+                  <a href="#" class="text-primary">Privacy Policy</a> and
+                  consent to being contacted regarding my inquiry.</label>
+              </div> -->
+              <button type="submit" class="!rounded-button w-full bg-primary text-white py-3 font-medium hover:bg-primary/90 transition-all shadow-md whitespace-nowrap">
+                Submit Request
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white pt-16 pb-8">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div>
+          <a href="#" class="text-3xl font-['Pacifico'] text-white mb-6 inline-block">logo</a>
+          <p class="text-gray-400 mb-6">
+            We are a full-service creative team specializing in helping
+            brands grow fast. Engage your clients through compelling visuals
+            that do most of the marketing for you.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full social-icon">
+              <i class="ri-facebook-fill"></i>
+            </a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full social-icon">
+              <i class="ri-twitter-fill"></i>
+            </a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full social-icon">
+              <i class="ri-instagram-fill"></i>
+            </a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full social-icon">
+              <i class="ri-linkedin-fill"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-6">Company</h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="#about" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+            </li>
+            <li>
+              <a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a>
+            </li>
+            <li>
+              <a href="#works" class="text-gray-400 hover:text-white transition-colors">Portfolio</a>
+            </li>
+            <!-- <li>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">Testimonials</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a>
+            </li> -->
+            <li>
+              <a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-6">Our Expertise</h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a>
+            </li>
+            <li>
+              <a href="#tech" class="text-gray-400 hover:text-white transition-colors">Technologies</a>
+            </li>
+            <li>
+              <a href="#works" class="text-gray-400 hover:text-white transition-colors">Portfolio</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-6">Subscribe</h3>
+          <p class="text-gray-400 mb-6">
+            Subscribe to our newsletter to receive updates on our latest
+            projects and insights.
+          </p>
+          <div class="mb-4">
+            <div class="flex">
+              <input type="email" placeholder="Your email address" class="w-full px-4 py-3 bg-gray-800 border-none rounded-l focus:outline-none focus:ring-1 focus:ring-primary text-sm" />
+              <button id="subsbtn" class="!rounded-button bg-primary text-white px-4 py-3 rounded-r font-medium hover:bg-primary/90 transition-all whitespace-nowrap">
+                Subscribe
+              </button>
+            </div>
+          </div>
+          <p class="text-gray-500 text-sm">
+            We respect your privacy. Unsubscribe at any time.
+          </p>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 mb-4 md:mb-0">
+          Creation of Devrious
+        </p>
+        <div class="flex space-x-6">
+          <!-- <a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Privacy Policy</a>
+          <a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Terms of Service</a>
+          <a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Cookie Policy</a> -->
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div id="subscribed-msg" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white text-sm px-6 py-3 rounded shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+    Subscribed!
+  </div>
+  <!-- Back to Top Button -->
+  <a href="#header">
+    <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg">
+      <i class="ri-arrow-up-line text-xl"></i>
+    </button>
+  </a>
+  <script>
+    const subscribeBtn = document.getElementById("subsbtn");
+    const subscribedMsg = document.getElementById("subscribed-msg");
+
+    subscribeBtn.addEventListener("click", () => {
+      subscribedMsg.classList.remove("opacity-0");
+      subscribedMsg.classList.add("opacity-100");
+
+      setTimeout(() => {
+        subscribedMsg.classList.remove("opacity-100");
+        subscribedMsg.classList.add("opacity-0");
+      }, 2000);
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+      // Header scroll effect
+      const header = document.getElementById("header");
+      window.addEventListener("scroll", function() {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-gray-900");
+          header.classList.remove("bg-transparent");
+        } else {
+          header.classList.remove("bg-gray-900");
+          header.classList.add("bg-transparent");
+        }
+      });
+      // Hero slider functionality
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".hero-slide");
+      const indicators = document.querySelectorAll(".slide-indicator");
+      const nextBtn = document.querySelector(
+        ".hero-slider button:last-child"
+      );
+      const prevBtn = document.querySelector(
+        ".hero-slider button:first-child"
+      );
+
+      function showSlide(index) {
+        slides.forEach((slide) => slide.classList.remove("active"));
+        indicators.forEach((indicator) =>
+          indicator.classList.remove("active")
+        );
+        slides[index].classList.add("active");
+        indicators[index].classList.add("active");
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        let next = currentSlide + 1;
+        if (next >= slides.length) next = 0;
+        showSlide(next);
+      }
+
+      function prevSlide() {
+        let prev = currentSlide - 1;
+        if (prev < 0) prev = slides.length - 1;
+        showSlide(prev);
+      }
+      // Set up automatic slider
+      let slideInterval = setInterval(nextSlide, 5000);
+      // Event listeners for manual controls
+      nextBtn.addEventListener("click", function() {
+        clearInterval(slideInterval);
+        nextSlide();
+        slideInterval = setInterval(nextSlide, 5000);
+      });
+      prevBtn.addEventListener("click", function() {
+        clearInterval(slideInterval);
+        prevSlide();
+        slideInterval = setInterval(nextSlide, 5000);
+      });
+      // Indicator clicks
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", function() {
+          clearInterval(slideInterval);
+          showSlide(index);
+          slideInterval = setInterval(nextSlide, 5000);
+        });
+      });
+      // Back to top button
+      const backToTopBtn = document.getElementById("back-to-top");
+      window.addEventListener("scroll", function() {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add("visible");
+        } else {
+          backToTopBtn.classList.remove("visible");
+        }
+      });
+      backToTopBtn.addEventListener("click", function() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+      // Custom checkbox functionality
+      const checkbox = document.getElementById("privacy-checkbox");
+      checkbox.addEventListener("click", function() {
+        this.classList.toggle("checked");
+      });
+    });
+  </script>
+</body>
+
+</html>
