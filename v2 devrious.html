@@ -43,6 +43,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     :where([class^="ri-"])::before {
       content: "\f3c2";
     }
@@ -203,7 +207,7 @@
   <!-- Header/Navigation -->
   <header id="header" class="header fixed w-full z-50 bg-transparent">
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#" class="text-3xl font-['Pacifico'] text-white"><img src="path/to/your/logo.png" alt="Logo" /></a>
+      <a href="#home" class="text-3xl font-['Pacifico'] text-white"><img src="logo.png" alt="Logo" width="30" height="auto" /></a>
       <nav class="hidden md:flex items-center space-x-8">
         <a href="#home" class="text-white hover:text-primary font-medium transition-colors">Home</a>
         <a href="#services" class="text-white hover:text-primary font-medium transition-colors">Services</a>
@@ -1023,7 +1027,7 @@
     <div class="container mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div>
-          <a href="#" class="text-3xl font-['Pacifico'] text-white mb-6 inline-block">logo</a>
+          <a href="#home" class="text-3xl font-['Pacifico'] text-white mb-6 inline-block"><img src="logo.png" alt="Logo" /></a>
           <p class="text-gray-400 mb-6">
             We are a full-service creative team specializing in helping
             brands grow fast. Engage your clients through compelling visuals
@@ -1116,11 +1120,9 @@
     Subscribed!
   </div>
   <!-- Back to Top Button -->
-  <a href="#header">
-    <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg">
-      <i class="ri-arrow-up-line text-xl"></i>
-    </button>
-  </a>
+  <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg z-40">
+    <i class="ri-arrow-up-line text-xl"></i>
+  </button>
   <script>
     const subscribeBtn = document.getElementById("subsbtn");
     const subscribedMsg = document.getElementById("subscribed-msg");
